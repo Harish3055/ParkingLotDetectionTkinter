@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+body{
+    background:white;
+    font-family: 'Poppins';
+}
+
+.container{
+    border-radius: 8px;
+    width:90%;
+    height: 90vh;
+    margin: 0 auto;
+    background: black;
+    color: rgb(252, 138, 32);
+
+    display: flex;
+    flex-direction: column;
+}
+
+.main-text{
+    text-align: center;
+    margin: 2em auto;
+    flex-grow: 0;
+}
+
+.main-text h1{
+   padding-top: 1em;
+   margin:0;
+}
+
+.main-text p{
+    margin:0;
+}
+
+.lot-id{
+    color:#2ecc71;
+}
+
+main{
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    flex-grow: 1;
+}
+.data-box{
+    padding-top:1rem; 
+    background: #35373a;
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 3rem 2.5rem 2.5rem auto;
+    justify-items: center;
+    align-items: center;
+    
+}
+
+.m-para{
+    font-size: 1.5em;
+    grid-column: 1/span 2;
+    grid-row: 1/2;
+}
+
+.total-para{
+    grid-column: 1/2;
+    grid-row: 2/3;
+}
+
+.total-data{
+    grid-column: 2/3;
+    grid-row: 2/3;
+}
+
+.avail-para{
+    grid-column: 1/2;
+    grid-row: 3/4;  
+}
+
+.avail-data{
+    grid-column: 2/3;
+    grid-row: 3/4;
+}
+
+.location{
+    grid-column: 1/3;
+    text-align: center;
+}
+
+.location i{
+    display: block;
+    font-size: 3rem;
+    text-align: center;
+}
+
+.display-box{
+    padding: 2em;
+    background: #797777;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(6em,1fr));
+    grid-gap:1.5rem;
+    align-items: center;
+    justify-items: center;
+}
+
+.lot-box{
+    border-radius: 6px;
+    background: #2ecc71;
+    width: 5em;
+    height: 7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+.inactive{
+    background: #c0392b !important;
+}

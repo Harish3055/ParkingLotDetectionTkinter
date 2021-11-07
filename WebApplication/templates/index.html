@@ -1,0 +1,88 @@
+<html>
+
+<head>
+	<meta charset="utf-8" />
+</head>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+<link rel="icon" href="/static/images/logo.png" type="image/x-icon">
+
+<div class="container">
+	<div class="main-text">
+		<h1>Smart Parking Dashboard</h1>
+	</div>
+	<main>
+		<div class="data-box">
+			<p class="m-para">Parking Status</p>
+			<p class="total-para">Total Seats:</p><span class="total-data">8</span>
+            <p class="avail-para">Available: </p><span class="avail-data" id="avail-data">0</span>
+        </div>
+        <div class="display-box">
+            <div id="1" class=" 1 lot-box">1</div>
+            <div id="2"  class="2 lot-box">2</div>
+            <div id="3"  class="3 lot-box">3</div>
+            <div id="4"  class="4 lot-box">4</div>
+            <div id="5"  class="5 lot-box">5</div>
+            <div id="6"  class="6 lot-box">6</div>
+            <div id="7"  class="7 lot-box">7</div>
+            <div id="8"  class="8 lot-box">8</div>
+        </div>
+    </main>
+</div>
+
+
+<script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-app.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-analytics.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-database.js"></script>
+<script>
+  var class_name = [];
+  for(let i=1;i<=8;i++){
+    class_name[i] = document.getElementById(i.toString());
+  }
+  function change_class(id,flag) {
+    if(id.classList.contains('inactive') == true && flag == 'True'){
+      id.classList.remove('inactive');
+    }
+    else if (id.classList.contains('inactive') == false && flag == 'False'){
+      id.classList.add('inactive');
+    }
+  }
+  // change_class(class_2,'True');
+  var empty_slots = {};
+  var firebaseConfig = {
+    apiKey: "AIzaSyB4TFJEGQz3sS1Fn9lRIczEbXCIez2C08s",
+    authDomain: "parkinglotdetection.firebaseapp.com",
+    databaseURL: "https://parkinglotdetection-default-rtdb.firebaseio.com",
+    projectId: "parkinglotdetection",
+    storageBucket: "parkinglotdetection.appspot.com",
+    messagingSenderId: "1041621554169",
+    appId: "1:1041621554169:web:55a6691d78b877dbaf6328",
+    measurementId: "G-YCZ43JH3G2"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+  var db = firebase.database().ref('parkinglotdetection-default-rtdb/empty_spaces');
+  // console.log(db);
+  db.on("value", function(snapshot) {
+     var count=0;
+     empty_slots = snapshot.val()['-MgZwjfetdxodVLdq4RM'];
+     for (let i = 1; i <= 8; i++) {
+        console.log(empty_slots['Slot_'+i.toString()]);
+        if(empty_slots['Slot_'+i.toString()] == 'True'){
+          count+=1;
+        }
+        change_class(class_name[i],empty_slots['Slot_'+i.toString()]);
+     } 
+     document.getElementById('avail-data').textContent = count;
+
+  }, function (error) {
+    console.log("Error: " + error.code);
+  });
+  
+</script>
+
+  </body>
+</html>
